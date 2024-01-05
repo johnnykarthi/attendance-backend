@@ -31,7 +31,7 @@ const corsOptions = {
 
 // Third-party middleware
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
