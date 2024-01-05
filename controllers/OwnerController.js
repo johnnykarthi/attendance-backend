@@ -141,7 +141,7 @@ const forgotpassword = async (req, res) => {
             from: process.env.EMAIL,
             to: email,
             subject: 'Sending Email using Node.js',
-            text: `http://localhost:3000/reset-password/${token}`
+            text: `https://attendance-management-v1.netlify.app/reset-password/${token}`
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

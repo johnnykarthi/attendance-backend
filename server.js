@@ -15,7 +15,7 @@ app.use((req,res,next)=>{
 app.use(express.json());
 
 
-const whitelist  = ['https://www.google.com','http://127.0.0.1:5500','http://localhost:3000',undefined];
+const whitelist  = ['https://attendance-management-v1.netlify.app/',undefined];
 
 const corsOptions = {
     origin: (origin, callback) => {
