@@ -6,17 +6,15 @@ const Schema = mongoose.Schema
 const employeeModel = new Schema({
     employeeName:{
         type:String,
-        required:true,
+        required:true
     },
     mobile:{
         type:Number,
-        required:true,
-        unique:true
+        required:true
     },
     email:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     role:{
         type:String,

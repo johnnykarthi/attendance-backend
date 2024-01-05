@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const createEmployee = async(req,res)=>{
     const emp = req.body
     const id = req.owner
-    console.log(id)
     try{
         const response = await Employee.create({...emp,ownerId:id})
         res.status(200).json({msg:"Employee has been created",response})
@@ -16,7 +15,7 @@ const createEmployee = async(req,res)=>{
 const getEmployee = async(req,res)=>{
     const id = req.owner
     try{
-        const response = await Employee.find({ownerId:id}).sort({employeeName:-1})
+        const response = await Employee.find({ownerId:id}).sort({createdAt:-1})
         res.status(200).json(response)
     }catch(err){
         res.status(400).json({msg:err.message})
@@ -45,11 +44,12 @@ const saveWorkDates = async(req,res)=>{
         employees.map(async(emp)=>{
             await Employee.findOneAndUpdate({_id:emp._id},{workDates:emp.workDates})
         })
+        res.status(200).json({msg:"All Work dates has been updated"})
     }
     catch(err){
         res.status(400).json({error:err.message})
     }
-    res.status(200).json({msg:"All Work dates has been updated"})
+    
     
 }
 

@@ -15,7 +15,7 @@ const requireAuth = (req,res,next)=>{
         req.owner = id
         next()
     }catch(err){
-        res.status(401).json({msg:"Authorization is failed"})
+        res.status(402).json({msg:"Authorization is failed"})
     }
 }
 

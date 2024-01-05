@@ -5,6 +5,15 @@ const validator = require('validator')
 const Schema = mongoose.Schema;
 
 const ownerModel = new Schema({
+    fullname:{
+        type:String,
+        required:true
+    },
+    mobile:{
+        type:String,
+        required:true,
+        unique:true
+    },
     email:{
         type:String,
         required:true,
@@ -19,8 +28,8 @@ const ownerModel = new Schema({
 
 
 
-ownerModel.statics.createOwner = async function(email,password){
-    if(!email || !password)
+ownerModel.statics.createOwner = async function(email,password,fullname,mobile){
+    if(!email || !password || !fullname || !mobile)
     {
         throw Error("All field must be filed")
     }
@@ -43,7 +52,7 @@ ownerModel.statics.createOwner = async function(email,password){
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password,salt)
 
-    const response = await this.create({email,password:hash})
+    const response = await this.create({fullname,mobile,email,password:hash})
 
     return response
 
