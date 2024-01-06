@@ -3,6 +3,7 @@ const otpGenerator = require('otp-generator')
 const OTP = require('../model/OTP')
 
 const nodemailer = require('nodemailer')
+const ownerModel = require('../model/ownerModel')
 
 
 const generateOTP  = async(req,res)=>{
@@ -10,7 +11,10 @@ const generateOTP  = async(req,res)=>{
     const otpgenerated = otpGenerator.generate(4, {lowerCaseAlphabets:false, upperCaseAlphabets: false, specialChars: false });
     try{
         const owner = await OTP.findOne({email})
-
+        const ownerExits = await ownerModel.findOne({email})
+        if(ownerExits){
+            return res.status(400).json({err:"Email already exits"})
+        }
         if(!owner){
             await OTP.create({email,otpgenerated})
         }
