@@ -117,6 +117,19 @@ const resetpassword = async (req, res) => {
 }
 
 
+const deactivateAccount = async(req,res)=>{
+    const {email} = req.body
+
+    try{
+        const owner = await OwnerModel.findOneAndDelete({email})
+        res.status(200).json({msg:'Your account has been deleted successfully'})
+    }
+    catch{
+        res.json({err:'Something went wrong'})
+    }
+}   
+
+
 const forgotpassword = async (req, res) => {
     const { email } = req.body
 
@@ -167,4 +180,4 @@ const forgotpassword = async (req, res) => {
 
 }
 
-module.exports = { signup, login, changepassword, resetpassword, forgotpassword }
+module.exports = { signup, login, changepassword, resetpassword, forgotpassword,deactivateAccount }

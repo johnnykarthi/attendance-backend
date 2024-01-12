@@ -72,7 +72,7 @@ ownerModel.statics.loginOwner = async function(email,password){
 
     if(!owner)
     {
-        throw Error("Email does not exists")
+        throw Error("Incorrect email address")
     }
 
     const match = await bcrypt.compare(password,owner.password)
